@@ -18,8 +18,8 @@ class SourceAdapter : ListAdapter<ArticlesItem, SourceAdapter.ViewHolder>(diffUt
             Glide.with(binding.ivSource.context)
                 .load(item.urlToImage)
                 .into(binding.ivSource)
-            binding.tvSourceTitle.text = item.source.name
-            binding.tvSourceDescription.text = item.title
+            binding.tvSourceTitle.text = item.title
+            binding.tvSourceDescription.text = item.description
         }
     }
 

@@ -2,7 +2,6 @@ package com.example.bottomnavigationapi.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -18,8 +17,8 @@ class TopHeadlinesAdapter : ListAdapter<ArticlesItem, TopHeadlinesAdapter.ViewHo
             Glide.with(binding.ivTopheadlines.context)
                 .load(item.urlToImage)
                 .into(binding.ivTopheadlines)
-            binding.tvTopheadlineTitle.text = item.source.name
-            binding.tvTopheadlinesDescription.text = item.title
+            binding.tvTopheadlineTitle.text = item.title
+            binding.tvTopheadlinesDescription.text = item.description
         }
     }
 
