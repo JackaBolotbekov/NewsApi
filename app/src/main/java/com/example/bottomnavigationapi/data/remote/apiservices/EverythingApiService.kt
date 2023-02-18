@@ -10,6 +10,5 @@ interface EverythingApiService {
     @GET("everything")
     suspend fun fetchBitcoin(
         @Query("q") q: String,
-        @Query("page") page: Int = 1
     ): Response<ArticlesItem>
 }

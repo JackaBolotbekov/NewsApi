@@ -7,9 +7,8 @@ import retrofit2.http.Query
 
 interface TopHeadlinesApiService{
 
-    @GET("everything")
+    @GET("top-headlines")
     suspend fun fetchTopHeadlines(
         @Query("q") q: String,
-        @Query("page") page: Int = 1
     ): Response<ArticlesItem>
 }

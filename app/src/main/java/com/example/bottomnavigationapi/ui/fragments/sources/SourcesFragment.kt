@@ -5,6 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.bottomnavigationapi.base.BaseFragment
 import com.example.bottomnavigationapi.ui.adapters.SourceAdapter
+import com.example.bottomnavigationapi.utils.Resource
 import com.example.youtube.R
 import com.example.youtube.databinding.FragmentSourcesBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,9 +28,19 @@ class SourcesFragment :
     }
 
     private fun subscribeToBitcoinById() {
-        viewModel.fetchSourcesBiId().observe(viewLifecycleOwner) {
-            lifecycleScope.launch {
-                sourceAdapter.submitData(it)
+        viewModel.fetchSourcesBiId("news").observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Error -> {
+
+                }
+                is Resource.Loading -> {
+
+                }
+                is Resource.Success -> {
+                    it.data?.let {
+                        sourceAdapter.submitList(it.articles)
+                    }
+                }
             }
         }
     }

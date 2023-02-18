@@ -5,6 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.bottomnavigationapi.base.BaseFragment
 import com.example.bottomnavigationapi.ui.adapters.EverythingAdapter
+import com.example.bottomnavigationapi.utils.Resource
 import com.example.youtube.R
 import com.example.youtube.databinding.FragmentEverythingBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,9 +28,19 @@ class EverythingFragment :
     }
 
     private fun subscribeToBitcoinById() {
-        viewModel.fetchEverythingBiId().observe(viewLifecycleOwner) {
-            lifecycleScope.launch {
-                bitcoinAdapter.submitData(it)
+        viewModel.fetchEverythingBiId("bitcoin").observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Error -> {
+
+                }
+                is Resource.Loading -> {
+
+                }
+                is Resource.Success -> {
+                    it.data?.let {
+                        bitcoinAdapter.submitList(it.articles)
+                    }
+                }
             }
         }
     }

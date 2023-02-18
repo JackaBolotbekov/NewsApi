@@ -4,21 +4,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bottomnavigationapi.data.models.ArticlesItem
 import com.example.youtube.databinding.ItemEverythingBinding
 
-class EverythingAdapter : PagingDataAdapter<ArticlesItem, EverythingAdapter.ViewHolder>(diffUtil) {
+class EverythingAdapter : ListAdapter<ArticlesItem, EverythingAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val binding: ItemEverythingBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(item: ArticlesItem) {
-            Glide.with(binding.ivEverything.context)
-                .load(item.urlToImage)
-                .into(binding.ivEverything)
-            binding.tvEverythingTitle.text = item.source.name
-            binding.tvEverythingDescription.text = item.title
+        fun onBind(item: ArticlesItem) = with(binding) {
+            Glide.with(ivEverything.context).load(item.urlToImage).into(ivEverything)
+            tvEverythingTitle.text = item.title
+            tvEverythingDescription.text = item.description
         }
     }
 
@@ -41,7 +40,7 @@ class EverythingAdapter : PagingDataAdapter<ArticlesItem, EverythingAdapter.View
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<ArticlesItem>() {
             override fun areItemsTheSame(oldItem: ArticlesItem, newItem: ArticlesItem): Boolean {
-                return oldItem == newItem
+                return oldItem.source.name == newItem.source.name
             }
 
             override fun areContentsTheSame(oldItem: ArticlesItem, newItem: ArticlesItem): Boolean {

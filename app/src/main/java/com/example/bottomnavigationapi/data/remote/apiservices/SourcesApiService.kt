@@ -7,9 +7,8 @@ import retrofit2.http.Query
 
 interface SourcesApiService{
 
-    @GET("everything")
+    @GET("top-headlines/source")
     suspend fun fetchSources(
         @Query("q") q: String,
-        @Query("page") page: Int = 1
     ): Response<ArticlesItem>
 }

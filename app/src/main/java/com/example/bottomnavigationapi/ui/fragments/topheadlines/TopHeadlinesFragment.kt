@@ -5,6 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.bottomnavigationapi.base.BaseFragment
 import com.example.bottomnavigationapi.ui.adapters.TopHeadlinesAdapter
+import com.example.bottomnavigationapi.utils.Resource
 import com.example.youtube.R
 import com.example.youtube.databinding.FragmentTopHeadlinesBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,9 +28,19 @@ class TopHeadlinesFragment :
     }
 
     private fun subscribeToBitcoinById() {
-        viewModel.fetchTopHeadlinesBiId().observe(viewLifecycleOwner) {
-            lifecycleScope.launch {
-                topHeadlinesAdapter.submitData(it)
+        viewModel.fetchTopHeadlinesBiId("us").observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Error -> {
+
+                }
+                is Resource.Loading -> {
+
+                }
+                is Resource.Success -> {
+                    it.data?.let {
+                        topHeadlinesAdapter.submitList(it.articles)
+                    }
+                }
             }
         }
     }

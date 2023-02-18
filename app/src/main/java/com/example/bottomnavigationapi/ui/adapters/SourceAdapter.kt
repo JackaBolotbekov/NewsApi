@@ -4,12 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bottomnavigationapi.data.models.ArticlesItem
 import com.example.youtube.databinding.ItemSourceBinding
 
-class SourceAdapter : PagingDataAdapter<ArticlesItem, SourceAdapter.ViewHolder>(diffUtil) {
+class SourceAdapter : ListAdapter<ArticlesItem, SourceAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val binding: ItemSourceBinding) :
         RecyclerView.ViewHolder(binding.root) {

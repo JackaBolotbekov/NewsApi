@@ -1,11 +1,11 @@
 package com.example.bottomnavigationapi.di
 
-import com.example.bottomnavigationapi.data.remote.client.RetrofitClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
+import dagger.hilt.components.SingletonComponent
+import com.example.bottomnavigationapi.data.remote.client.RetrofitClient
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -29,5 +29,4 @@ object NetworkModule {
     @Provides
     fun provideTopHeadlinesApiService(retrofitClient: RetrofitClient) =
         retrofitClient.provideTopHeadlinesApiService()
-
 }
